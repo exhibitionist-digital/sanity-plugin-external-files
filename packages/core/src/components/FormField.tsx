@@ -1,4 +1,4 @@
-import { Flex, Stack, Text } from '@sanity/ui'
+import { Box, Flex, Stack, Text } from '@sanity/ui'
 import { PropsWithChildren } from 'react'
 import { FormFieldValidationStatus, ValidationMarker } from 'sanity'
 
@@ -10,9 +10,9 @@ export default function FormField(
   }>,
 ) {
   return (
-    <Stack space={2}>
+    <Stack space={3}>
       <Text weight="semibold" size={1}>
-        <Flex gap={2} align="center">
+        <Flex gap={1} align="center">
           {props.label}
           <FormFieldValidationStatus
             validation={props.markers?.map((m) => ({
@@ -24,9 +24,11 @@ export default function FormField(
         </Flex>
       </Text>
       {props.description && (
-        <Text size={1} muted>
-          {props.description}
-        </Text>
+        <Box marginBottom={2}>
+          <Text size={1} muted>
+            {props.description}
+          </Text>
+        </Box>
       )}
       {props.children}
     </Stack>

@@ -1,9 +1,11 @@
-import { UploadIcon } from '@sanity/icons'
+import { PublishIcon, WarningOutlineIcon } from '@sanity/icons'
 import { Schema } from '@sanity/schema'
 import { ValidationMarker } from '@sanity/types'
 import {
+  Box,
   Button,
   Card,
+  Flex,
   Heading,
   Label,
   Spinner,
@@ -94,29 +96,34 @@ const ConfigureCredentials: React.FC<{
   if (props.vendorConfig.credentialsFields?.length === 0) return null
 
   return (
-    <Card padding={4} border>
+    <Card padding={4}>
       <Stack space={3}>
         {credentials ? (
-          <>
-            <Heading size={3}>Edit settings</Heading>
-            <Text size={2}>
-              Be careful when editing these changes as they can be destructive.
-            </Text>
-          </>
+          <Stack space={4}>
+            <Card tone="caution" padding={2}>
+              <Flex align="center" gap={2}>
+                <WarningOutlineIcon />
+                <Text size={1}>
+                  Be careful when changing these settings as they can prevent
+                  file access.
+                </Text>
+              </Flex>
+            </Card>
+          </Stack>
         ) : (
-          <>
+          <Stack space={4}>
             <Label size={2} muted>
               External media library
             </Label>
-            <Heading size={3}>First time set-up</Heading>
-            <Text size={2}>
+            <Heading size={2}>First time setup</Heading>
+            <Text size={1}>
               In order to communicate with external vendor to upload videos &
               audio, you’ll have to set-up credentials below:
             </Text>
-          </>
+          </Stack>
         )}
         {props.vendorConfig.credentialsFields?.length ? (
-          <form style={{ marginTop: '1.5rem' }} onSubmit={submitCredentials}>
+          <Box as="form" marginTop={4} onSubmit={submitCredentials}>
             <Stack space={4}>
               {props.vendorConfig.credentialsFields.map((field) => {
                 const fieldMarkers = markers.filter(
@@ -127,6 +134,7 @@ const ConfigureCredentials: React.FC<{
                 )
                 return (
                   <FormField
+                    key={field.name}
                     label={field.title || field.name}
                     description={field.description}
                     markers={fieldMarkers}
@@ -143,12 +151,8 @@ const ConfigureCredentials: React.FC<{
                 )
               })}
               <Button
-                text={
-                  credentials?.apiKey
-                    ? 'Update credentials'
-                    : 'Set-up credentials'
-                }
-                icon={UploadIcon}
+                text="Save credentials"
+                icon={PublishIcon}
                 iconRight={isLoading && Spinner}
                 tone="positive"
                 fontSize={2}
@@ -161,7 +165,7 @@ const ConfigureCredentials: React.FC<{
                 }
               />
             </Stack>
-          </form>
+          </Box>
         ) : (
           <>
             <Heading size={3}>Plugin configured incorrectly</Heading>

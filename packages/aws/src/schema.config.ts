@@ -43,6 +43,14 @@ export const credentialsFields: VendorConfiguration['credentialsFields'] = [
     validation: (Rule) => Rule.required(),
   },
   {
+    name: 'cloudfrontDomain',
+    title: 'CloudFront Domain',
+    description:
+      'CloudFront distribution domain to access bucket objects (optional)',
+    icon: EarthGlobeIcon,
+    type: 'url',
+  },
+  {
     name: 'folder',
     title: 'Folder in Space',
     description:

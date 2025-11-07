@@ -2,8 +2,7 @@
 // https://github.com/sanity-io/sanity/blob/next/packages/sanity/src/desk/components/paneItem/PaneItemPreview.tsx
 import { PreviewValue } from '@sanity/types'
 import { Inline } from '@sanity/ui'
-import { isNumber, isString } from 'lodash'
-import React, { isValidElement, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useObservable } from 'react-rx'
 import type { Observable } from 'rxjs'
 import type { SanityDocument, SchemaType } from 'sanity'
@@ -15,15 +14,14 @@ import {
   SanityDefaultPreview,
   getPreviewStateObservable,
   getPreviewValueWithFallback,
-  isRecord,
 } from 'sanity'
 import { DraftStatus } from './DraftStatus'
 import { PublishedStatus } from './PublishedStatus'
 
 export interface PaneItemPreviewState {
   isLoading?: boolean
-  draft?: PreviewValue | Partial<SanityDocument> | null
-  published?: PreviewValue | Partial<SanityDocument> | null
+  snapshot?: PreviewValue | Partial<SanityDocument> | null
+  original?: PreviewValue | Partial<SanityDocument> | null
 }
 
 export interface PaneItemPreviewProps {
@@ -37,12 +35,6 @@ export interface PaneItemPreviewProps {
 
 export function PaneItemPreview(props: PaneItemPreviewProps) {
   const { icon, layout, presence, schemaType, value } = props
-  const title =
-    (isRecord(value.title) && isValidElement(value.title)) ||
-    isString(value.title) ||
-    isNumber(value.title)
-      ? (value.title as string | number | React.ReactElement)
-      : null
 
   // NOTE: this emits sync so can never be null
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -52,25 +44,25 @@ export function PaneItemPreview(props: PaneItemPreviewProps) {
         props.documentPreviewStore,
         schemaType,
         value._id,
-        title,
       ),
-    [props.documentPreviewStore, schemaType, value._id, title],
+    [props.documentPreviewStore, schemaType, value._id],
   )!
-  const { draft, published, isLoading } = useObservable(previewObservable) || {}
+  const { snapshot, original, isLoading } =
+    useObservable(previewObservable) || {}
 
   const status = isLoading ? null : (
     <Inline space={4}>
       {presence && presence.length > 0 && (
         <DocumentPreviewPresence presence={presence} />
       )}
-      <PublishedStatus document={published} />
-      <DraftStatus document={draft} />
+      <PublishedStatus document={original} />
+      <DraftStatus document={snapshot} />
     </Inline>
   )
 
   return (
     <SanityDefaultPreview
-      {...(getPreviewValueWithFallback({ value, draft, published }) as any)}
+      {...(getPreviewValueWithFallback({ snapshot, original }) as any)}
       isPlaceholder={isLoading}
       icon={icon}
       layout={layout}
