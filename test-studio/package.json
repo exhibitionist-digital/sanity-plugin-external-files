@@ -15,15 +15,15 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^3.58.0",
+    "@sanity/vision": "^4.14.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.58.0",
-    "sanity-plugin-r2-files": "workspace:*",
+    "sanity": "^4.14.1",
     "sanity-plugin-digital-ocean-files": "workspace:*",
     "sanity-plugin-external-files": "workspace:*",
+    "sanity-plugin-r2-files": "workspace:*",
     "sanity-plugin-s3-files": "workspace:*",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@types/react": "latest",
