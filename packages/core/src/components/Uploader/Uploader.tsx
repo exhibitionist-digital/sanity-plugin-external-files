@@ -1,12 +1,11 @@
-import React from 'react'
+import { SearchIcon, TrashIcon, UploadIcon } from '@sanity/icons'
 import { Button, Container, Stack } from '@sanity/ui'
-import { SearchIcon, UploadIcon, TrashIcon } from '@sanity/icons'
-
-import useUpload from './useUpload'
-import { MediaFile, SanityUpload, VendorConfiguration } from '../../types'
-import UploadBox from './UploadBox'
-import MediaPreview from '../MediaPreview'
+import React from 'react'
 import { Accept } from 'react-dropzone'
+import { MediaFile, SanityUpload, VendorConfiguration } from '../../types'
+import MediaPreview from '../MediaPreview'
+import UploadBox from './UploadBox'
+import useUpload from './useUpload'
 
 export interface UploaderProps {
   vendorConfig: VendorConfiguration

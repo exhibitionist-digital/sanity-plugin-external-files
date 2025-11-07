@@ -1,4 +1,4 @@
-import { Dialog, ThemeProvider, studioTheme } from '@sanity/ui'
+import { Dialog } from '@sanity/ui'
 import { useCallback, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ObjectInputProps, set, unset } from 'sanity'
@@ -52,34 +52,32 @@ export default function createInput(vendorConfig: VendorConfiguration) {
 
     return (
       <CredentialsProvider vendorConfig={vendorConfig}>
-        <ThemeProvider theme={studioTheme}>
-          <UploaderWithConfig
-            accept={accept}
-            storeOriginalFilename={storeOriginalFilename}
-            onSuccess={updateValue}
-            chosenFile={uploadedFile || value}
-            removeFile={removeFile}
-            openBrowser={toggleBrowser}
-            vendorConfig={vendorConfig}
-          />
-          {browserOpen &&
-            createPortal(
-              <Dialog
-                header="Select File"
-                id="file-browser"
-                onClose={toggleBrowser}
-                onClickOutside={toggleBrowser}
-                width={5}
-              >
-                <Browser
-                  vendorConfig={vendorConfig}
-                  onSelect={updateValue}
-                  accept={accept}
-                />
-              </Dialog>,
-              document.getElementsByTagName('body')[0],
-            )}
-        </ThemeProvider>
+        <UploaderWithConfig
+          accept={accept}
+          storeOriginalFilename={storeOriginalFilename}
+          onSuccess={updateValue}
+          chosenFile={uploadedFile || value}
+          removeFile={removeFile}
+          openBrowser={toggleBrowser}
+          vendorConfig={vendorConfig}
+        />
+        {browserOpen &&
+          createPortal(
+            <Dialog
+              header="Select File"
+              id="file-browser"
+              onClose={toggleBrowser}
+              onClickOutside={toggleBrowser}
+              width={5}
+            >
+              <Browser
+                vendorConfig={vendorConfig}
+                onSelect={updateValue}
+                accept={accept}
+              />
+            </Dialog>,
+            document.getElementsByTagName('body')[0],
+          )}
       </CredentialsProvider>
     )
   }

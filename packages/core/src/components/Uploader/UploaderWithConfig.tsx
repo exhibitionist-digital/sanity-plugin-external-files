@@ -1,4 +1,4 @@
-import { Card, Spinner, Box } from '@sanity/ui'
+import { Box, Card, Spinner } from '@sanity/ui'
 import React from 'react'
 import ConfigureCredentials from '../Credentials/ConfigureCredentials'
 import { CredentialsContext } from '../Credentials/CredentialsProvider'
