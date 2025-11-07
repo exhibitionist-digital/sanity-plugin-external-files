@@ -164,13 +164,13 @@ const FileDetails: React.FC<FileDetailsProps> = (props) => {
       width={2}
       position="fixed"
       footer={
-        <Card padding={3}>
-          <Flex justify="space-between" align="center">
+        <Card padding={4} borderTop>
+          <Flex justify="flex-end" align="center" gap={3}>
             <Button
               icon={TrashIcon}
-              fontSize={2}
+              fontSize={1}
               padding={3}
-              mode="bleed"
+              mode="ghost"
               text="Delete"
               tone="critical"
               onClick={() => send('DELETE')}
@@ -179,7 +179,7 @@ const FileDetails: React.FC<FileDetailsProps> = (props) => {
             {state.context.modified && (
               <Button
                 icon={CheckmarkIcon}
-                fontSize={2}
+                fontSize={1}
                 padding={3}
                 mode="default"
                 text="Save and close"
