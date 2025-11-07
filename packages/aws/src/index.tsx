@@ -1,12 +1,12 @@
-import { definePlugin } from 'sanity'
+import { definePlugin, Plugin } from 'sanity'
 import {
-  StudioTool,
-  ToolIcon,
-  VendorConfiguration,
   createInput,
   getCustomDataSchema,
   getDimensionsSchema,
   getStoredFileSchema,
+  StudioTool,
+  ToolIcon,
+  VendorConfiguration,
 } from 'sanity-plugin-external-files'
 import deleteFile from './deleteFile'
 import { credentialsFields, schemaConfig } from './schema.config'
@@ -14,7 +14,7 @@ import uploadFile from './uploadFile'
 
 const VENDOR_ID = 's3-files'
 
-export const s3Files = definePlugin((userConfig?: UserConfig) => {
+export const s3Files: Plugin<UserConfig> = definePlugin((userConfig?: UserConfig) => {
   const config = buildConfig(userConfig)
 
   return {
