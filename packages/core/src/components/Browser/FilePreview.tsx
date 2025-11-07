@@ -1,10 +1,10 @@
-import React from 'react'
-import { Card, Button, Stack } from '@sanity/ui'
 import { CheckmarkIcon, EditIcon } from '@sanity/icons'
+import { Button, Card, Flex, Stack } from '@sanity/ui'
+import React from 'react'
 
-import MediaPreview from '../MediaPreview'
 import { SanityUpload } from '../../types'
 import FileMetadata from '../FileMetadata'
+import MediaPreview from '../MediaPreview'
 
 interface FilePreviewProps {
   onSelect?: (file: SanityUpload) => void
@@ -35,15 +35,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
       >
         <MediaPreview file={file} context="browser" />
         <FileMetadata file={file} />
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'flex-end',
-            justifyContent: 'flex-start',
-            gap: '.35rem',
-          }}
-        >
+        <Flex align="flex-end" justify="flex-start" gap={1}>
           {onSelect && (
             <Button
               icon={CheckmarkIcon}
@@ -58,14 +50,14 @@ const FilePreview: React.FC<FilePreviewProps> = ({
           )}
           <Button
             icon={EditIcon}
-            fontSize={2}
+            fontSize={1}
             padding={2}
             mode="ghost"
             text="Details"
             style={{ flex: 1 }}
             onClick={edit}
           />
-        </div>
+        </Flex>
       </Stack>
     </Card>
   )

@@ -62,8 +62,7 @@ const Browser: React.FC<BrowserProps> = (props) => {
           getFilterForExtension(accept),
         ]
 
-        return sanityClient.fetch(/* groq */ `
-        *[${filters
+        return sanityClient.fetch(/* groq */ `*[${filters
           .filter(Boolean)
           .map((f) => `(${f})`)
           .join(' && ')}] | order(_createdAt desc)
@@ -160,8 +159,8 @@ const Browser: React.FC<BrowserProps> = (props) => {
             ) : null}
             <Grid
               gap={4}
+              marginTop={5}
               style={{
-                marginTop: '2rem',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr)',
               }}
             >

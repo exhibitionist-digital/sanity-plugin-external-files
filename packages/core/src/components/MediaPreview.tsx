@@ -6,15 +6,15 @@ import {
   PlayIcon,
 } from '@sanity/icons'
 import imageUrlBuilder from '@sanity/image-url'
-import { Box, Card, Spinner, Stack } from '@sanity/ui'
+import { Box, Card, Spinner } from '@sanity/ui'
 import React, { ReactNode } from 'react'
+import styled from 'styled-components'
 import { useSanityClient } from '../scripts/sanityClient'
 import { MediaFile, SanityUpload } from '../types'
 import AudioIcon from './AudioIcon'
 import FileMetadata from './FileMetadata'
 import VideoIcon from './VideoIcon'
 import WaveformDisplay from './WaveformDisplay'
-import styled from 'styled-components'
 
 export interface MediaPreview {
   file: MediaFile

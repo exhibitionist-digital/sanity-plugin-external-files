@@ -181,9 +181,9 @@ const FileDetails: React.FC<FileDetailsProps> = (props) => {
                 icon={CheckmarkIcon}
                 fontSize={2}
                 padding={3}
-                mode="ghost"
+                mode="default"
                 text="Save and close"
-                tone="positive"
+                tone="default"
                 onClick={() => send('SAVE')}
                 iconRight={isSaving && Spinner}
                 disabled={isSaving}
@@ -337,22 +337,27 @@ const FileDetails: React.FC<FileDetailsProps> = (props) => {
                 <IconInfo
                   text={`Duration: ${formatSeconds(file.duration)}`}
                   icon={ClockIcon}
-                  size={2}
+                  size={1}
                 />
               )}
               {file?.fileSize && (
                 <IconInfo
                   text={`Size: ${formatBytes(file.fileSize, 2)}`}
                   icon={DownloadIcon}
-                  size={2}
+                  size={1}
                 />
               )}
               <IconInfo
-                text={`Uploaded on: ${
-                  new Date(file._createdAt).toISOString().split('T')[0]
-                }`}
+                text={`Uploaded on: ${new Date(file._createdAt).toLocaleString(
+                  undefined,
+                  {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
+                    hourCycle: 'h12',
+                  },
+                )}`}
                 icon={CalendarIcon}
-                size={2}
+                size={1}
               />
               {file.fileURL && (
                 <Inline space={2}>
@@ -393,7 +398,7 @@ const FileDetails: React.FC<FileDetailsProps> = (props) => {
               id="details-panel"
               hidden={!state.matches('tab.details_tab')}
             >
-              <Stack space={3}>
+              <Stack space={5}>
                 <AssetInput
                   label="Internal title"
                   description="Not visible to users. Useful for finding files later."
